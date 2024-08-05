@@ -8,23 +8,20 @@ public class Solution {
 		Scanner sc = new Scanner(System.in);
 		int tc = sc.nextInt();
 		for (int t=1; t<=tc; t++) {
-			String[] arr = sc.next().split("");
-			int cnt = 1;
+			String input = sc.next();
+			int cnt = 0;
 			int stick = 0;
-			for (int i=0; i<arr.length-1; i++) {
-				if (i < arr.length-1 && arr[i].equals("(") && arr[i+1].equals(")")) {
+			for (int i=0; i<input.length(); i++) {
+				if (i < input.length()-1 && input.charAt(i) == '(' && input.charAt(i+1) == ')') {
 					// 레이저
 					// 쇠막대기를 카운트에 더해준다.
-					// i++;
 					cnt += stick;
 					i++;
-				} else if (arr[i].equals("(")) {
+				} else if (input.charAt(i) == '(') {
 					// 새로운 쇠막대기
-					// stick++;
 					stick++;
-				} else if (arr[i].equals(")")) {
+				} else if (input.charAt(i) == ')') {
 					// 쇠막대기 끝
-					// stick--;
 					stick--;
 					cnt++;
 				}
