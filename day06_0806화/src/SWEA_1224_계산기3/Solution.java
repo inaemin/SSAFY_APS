@@ -42,7 +42,6 @@ public class Solution {
 					stack.add(nextChar);
 				}
 			}
-			System.out.println(postfix);
 			
 			// 2. 후위표기식 연산
 			List<Integer> stack2 = new ArrayList<>();
@@ -70,7 +69,7 @@ public class Solution {
 				}
 			}
 			
-			System.out.println("#"+t+" "+stack2.get(t));
+			System.out.println("#"+t+" "+stack2.get(0));
 		}
 		sc.close();
 		
