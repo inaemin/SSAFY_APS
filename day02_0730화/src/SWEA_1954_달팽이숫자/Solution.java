@@ -57,7 +57,7 @@ public class Solution {
 				for (int y=0; y<n; y++) {
 					System.out.print(arr[x][y]+" ");
 				}
-				System.out.println('\n');
+				System.out.println();
 			}
 			
 		}
