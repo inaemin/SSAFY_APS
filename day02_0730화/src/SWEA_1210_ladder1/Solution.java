@@ -8,6 +8,7 @@ public class Solution {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		for (int t=1; t<=10; t++) {
+			int tc = sc.nextInt();
 			// 100x100의 보드 초기화
 			int[][] board = new int[SIZE][SIZE];
 			// 도착지 좌표 x, y
@@ -35,21 +36,18 @@ public class Solution {
 					if (endC-1 >= 0 && board[endR][endC-1] == 1) {
 						dir = 'l';
 						endC--;
-						break;
 					} else if (endC+1 < SIZE && board[endR][endC+1] == 1) {
 						dir = 'r';
 						endC++;
-						break;
 					} else if (board[endR-1][endC] == 1) {
 						endR--;
 					}
 				}
 				
-				// 만약 왼쪽이 1이라면
 				// dir = 'l'
 				// 위쪽이 1이 나올때까지 왼쪽으로 이동
 				if (dir == 'l') {
-					if (endC-1 >= 0 && board[endR-1][endC] != 1) {
+					if (board[endR-1][endC] != 1) {
 						endC--;
 					} else {
 						dir = 'u';
@@ -57,11 +55,10 @@ public class Solution {
 					}
 				}
 				
-				// 만약 오른쪽이 1이라면
 				// dir = 'r'
-				// board[endR-1][endC]가 1이 나올때까지 오른쪽으로 이동
+				// 위쪽이 1이 나올때까지 오른쪽으로 이동
 				if (dir == 'r') {
-					if (endC+1 < SIZE && board[endR-1][endC] != 1) {
+					if (board[endR-1][endC] != 1) {
 						endC++;
 					} else {
 						dir = 'u';
@@ -70,7 +67,7 @@ public class Solution {
 				}
 			}
 			
-			System.out.println("#"+t+" "+endC);
+			System.out.println("#"+tc+" "+endC);
 		}
 		sc.close();
 	}
