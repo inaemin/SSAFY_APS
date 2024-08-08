@@ -22,17 +22,15 @@ public class Solution {
 			// 마름모를 읽으면서 수익 계산
 			int profit = 0;
 			for (int i=0; i<=n/2; i++) {
-				for (int j=0; j<n; j++) {
-					if (j >= n/2-i && j <= n/2+i) {
-						profit += farm[i][j];
-					}
+				for (int j=n/2-i; j<= n/2+i; j++) {
+					profit += farm[i][j];
 				}
 			}
 			for (int i=n/2+1; i<n; i++) {
-				for (int j=0; j<n; j++) {
-					if (j > n/2-(n-i) && j < n/2+(n-i)) {
-						profit += farm[i][j];
-					}
+				for (int j=n/2-(n-i)+1; j<n/2+(n-i); j++) {
+					profit += farm[i][j];
+//					if (j > n/2-(n-i) && j < n/2+(n-i)) {
+//					}
 				}
 			}
 			
