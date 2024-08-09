@@ -24,24 +24,24 @@ public class Solution {
 				}
 			}
 			
+			// [[W, B, R], ...]
+			int[][] repaint_flag = new int[n][3];
+			for (int i=0; i<n; i++) {
+				// W로 만들기 위해 바꿔야 하는 수
+				repaint_flag[i][0] = flag[i][1] + flag[i][2];
+				// B로 만들기 위해 바꿔야 하는 수
+				repaint_flag[i][1] = flag[i][0] + flag[i][2];
+				// R로 만들기 위해 바꿔야 하는 수
+				repaint_flag[i][2] = flag[i][0] + flag[i][1];
+			}
+			
 			// 첫째줄과 마지막줄은 무조건 흰줄과 빨간줄이 되어야 함
 			int cnt = 0;
 			char line = 'W';
-			cnt += flag[0][1] + flag[0][2]; // 첫째줄
-			cnt += flag[n-1][0] + flag[n-1][1]; // 마지막줄
+			cnt += repaint_flag[0][0]; // 첫째줄
+			cnt += repaint_flag[n-1][2]; // 마지막줄
 			for (int i=1; i<n-1; i++) {
-				if (line == 'W' && flag[i][1]+flag[i][2] > flag[i][0]+flag[i][2]) {
-					line = 'B';
-				} else if (line == 'B' && flag[i][0]+flag[i][2] > flag[i][0]+flag[i][1]) {
-					line = 'R';
-				}
-				if (line == 'W') {
-					cnt += flag[i][1] + flag[i][2];
-				} else if (line == 'B') {
-					cnt += flag[i][0] + flag[i][2];
-				} else if (line == 'R') {
-					cnt += flag[i][0] + flag[i][1];
-				}
+				
 			}
 			
 			System.out.println("#"+t+" "+cnt);
