@@ -71,7 +71,7 @@ class SinglyLinkedList {
 	}	
 }
 
-public class LinkedLink_단순연결리스트 {
+public class LinkedList_단순연결리스트 {
 	public static void main(String[] args) {
 		SinglyLinkedList list = new SinglyLinkedList();
 		
