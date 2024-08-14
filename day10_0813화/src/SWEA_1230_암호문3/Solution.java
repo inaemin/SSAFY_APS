@@ -142,7 +142,7 @@ public class Solution {
 			}
 			
 			// 출력
-			System.out.print("#"+t+" ");
+			System.out.print("#"+t);
 			list.printFirstTenNumbers();
 			System.out.println();
 		}
