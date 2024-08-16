@@ -42,16 +42,17 @@ public class Solution {
 		int T = sc.nextInt();
 		for (int t=1; t<=T; t++) {
 			int N = sc.nextInt();
+			MaxHeap heap = new MaxHeap();
 			for (int i=0; i<N; i++) {
 				int operator = sc.nextInt();
 				if (operator == 1) {
 					int x = sc.nextInt();
 					// x를 최대 힙에 추가
-					
-					
+					heap.push(x);
 				} else {
 					// 현재 최대 힙의 루트 노드의 키값을 출력
 					// 해당 노드를 삭제
+					heap.poll();
 				}
 			}
 		}
