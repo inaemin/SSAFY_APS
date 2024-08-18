@@ -18,21 +18,42 @@ class MaxHeap {
 	}
 	
 	void push(int data) {
+		max_heap[++heap_size] = data;
 		
+		int p = heap_size / 2;
+		int ch = heap_size;
+		while (ch != 1 && max_heap[p] < max_heap[ch]) {
+			swap(p, ch);
+			ch = p;
+			p = ch/2;
+		}
 	}
 	
 	void poll() {
-		int popItem = max_heap[0];
-		System.out.print(popItem);
-		max_heap[0] = max_heap[heap_size--];
+		if (heap_size == 0) {
+			System.out.print(" " + -1);
+			return;
+		}
+		
+		int popItem = max_heap[1];
+		System.out.print(" "+popItem);
+		max_heap[1] = max_heap[heap_size--];
 		
 		int p = 1;
 		int ch = p * 2;
-		if (ch + 1 <= MAX_NUM && max_heap[ch] < max_heap[ch+1]) {
+		
+		if (ch + 1 <= heap_size && max_heap[ch] < max_heap[ch+1]) {
 			ch++;
 		}
 		
-		while (ch <= heap_size && heap[ch] > heap[p])
+		while (ch <= heap_size && max_heap[ch] > max_heap[p]) {
+			swap(p, ch);
+			p = ch;
+			ch = p * 2;
+			if (ch + 1 <= heap_size && max_heap[ch] < max_heap[ch+1]) {
+				ch++;
+			}
+		}
 	}
 }
 
@@ -43,6 +64,7 @@ public class Solution {
 		for (int t=1; t<=T; t++) {
 			int N = sc.nextInt();
 			MaxHeap heap = new MaxHeap();
+			System.out.print("#"+t);
 			for (int i=0; i<N; i++) {
 				int operator = sc.nextInt();
 				if (operator == 1) {
@@ -55,6 +77,7 @@ public class Solution {
 					heap.poll();
 				}
 			}
+			System.out.println();
 		}
 		sc.close();
 	}
