@@ -32,8 +32,11 @@ public class Solution {
 			// ban3: N-p2-1
 			// p1_arr: p1이 가능한 인덱스
 			// p2_arr: p2가 가능한 인덱스
-			int p1 = min; // 최소
+			
 			List<Integer> p1_arr = new ArrayList<>();
+			List<Integer> p2_arr = new ArrayList<>();
+
+			int p1 = min; // 최소
 			while (true) {
 				while (p1 > 0 && p1 < N && scores[p1-1] == scores[p1]) {
 					p1++;
@@ -45,7 +48,6 @@ public class Solution {
 			}
 			
 			int p2 = N-1-min; // 최소
-			List<Integer> p2_arr = new ArrayList<>();
 			while (true) {
 				while (p2 >= 0 && p2 < N-1 && scores[p2] == scores[p2+1]) {
 					p2--;
@@ -55,23 +57,24 @@ public class Solution {
 					p2--;					
 				} else break;
 			}
-			
+
 			int min_diff = Integer.MAX_VALUE;
 			for (int i=0; i<p1_arr.size(); i++) {
 				for (int j=0; j<p2_arr.size(); j++) {
 					int c1 = p1_arr.get(i);
 					int c2 = p2_arr.get(j);
 					if (c1 > c2) continue;
-					int ban1 = c1;
-					if (ban1 < min || ban1 > max) continue;
 					int ban2 = c2-c1+1;
 					if (ban2 < min || ban2 > max) continue;
+					int ban1 = c1;
 					int ban3 = N-c2-1;
-					if (ban3 < min || ban3 > max) continue;
+					// 세 반 중 최댓값
 					int max_ban = Math.max(ban2, ban3);
 					max_ban = Math.max(ban1, max_ban);
+					// 세 반 중 최솟값
 					int min_ban = Math.min(ban2, ban3);
 					min_ban = Math.min(ban1, min_ban);
+					// 최댓값과 최솟값의 차이
 					min_diff = Math.min(max_ban - min_ban, min_diff);
 				}
 			}
