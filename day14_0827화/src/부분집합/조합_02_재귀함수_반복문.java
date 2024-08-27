@@ -24,7 +24,7 @@ public class 조합_02_재귀함수_반복문 {
 			System.out.println(Arrays.toString(sel));
 			return;
 		}
-		// 이미 범위를 정해두고 반복문을 돌리기 때문에 ㅜ벗어날 걱정을 할 필요 없음.
+		// 이미 범위를 정해두고 반복문을 돌리기 때문에 벗어날 걱정을 할 필요 없음.
 		// 재귀부분
 		
 		for (int i=idx; i<=N-R+sidx; i++) {
