@@ -10,9 +10,11 @@ public class Solution {
 		for (int i=0; i<arr.length; i++) {
 			arr[i] = sc.nextInt();
 		}
-		
+		// 내장 메소드 이용
 		Arrays.sort(arr);
 		
 		System.out.println(arr[500000]);
+		
+		sc.close();
 	}
 }
