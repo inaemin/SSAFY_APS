@@ -4,16 +4,18 @@ import java.util.Scanner;
 
 public class Solution {
 	static int T;
-	static int[] cards;
+	static boolean[] cards;
+	static final int total_card_count = 18;
 	static final int card_count = 9;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		T = sc.nextInt();
 		for (int t=1; t<=T; t++) {
-			cards = new int[card_count];
+			cards = new boolean[total_card_count+1];
 			for (int i=0; i<card_count; i++) {
-				cards[i] = sc.nextInt();
+				int num = sc.nextInt();
+				cards[num] = true;
 			}
 			
 			
