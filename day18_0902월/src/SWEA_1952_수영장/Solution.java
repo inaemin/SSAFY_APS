@@ -6,7 +6,6 @@ public class Solution {
 	static int T; // 테스트 케이스 수
 	static int[] price; // 이용권 요금
 	static int[] plan; // 12개월 이용계획
-	static int min_expanse; // 최소 지출 비용
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -22,22 +21,17 @@ public class Solution {
 			for (int i=1; i<=12; i++) {
 				plan[i] = sc.nextInt();
 			}
-			// dp?
+			// 매월 최솟값을 저장할 dp배열 초기화
 			int[] dp = new int[13];
-			for (int p=0; p<3; p++) {
-				for (int i=1; i<=12; i++) {
-					if (plan[i] == 0) {
-						plan[i] = plan[i-1];
-					} else {
-						// 1일 이용권
-						// 1달 이용권
-						// 3달 이용권
-					}
-				}				
+			for (int i=1; i<=12; i++) {
+				dp[i] = dp[i-1] + Math.min(price[0] * plan[i], price[1]);
+				if (i >= 3) {
+					dp[i] = Math.min(dp[i], dp[i-3] + price[2]);
+				}
 			}
 			
 			// 1년 이용권과 dp[12]을 비교하여 작은 값이 최소 비용
-			min_expanse = Math.min(price[3], dp[12]);
+			int min_expanse = Math.min(price[3], dp[12]);
 			
 			// 출력
 			System.out.println("#"+t+" "+min_expanse);
