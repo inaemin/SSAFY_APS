@@ -37,6 +37,18 @@ public class 그래프최소비용01_크루스칼 {
 		
 		Edge[] edges = new Edge[E];
 		
+		int[][] edges2 = new int[E][3]; // [0]: 시작, [1]: 로직, [2]: 가중치
+		
+		Arrays.sort(edges2, new Comparator<int[]>() {
+
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				// TODO Auto-generated method stub
+				return o1[2] - o2[2];
+			}
+			
+		});
+		
 		for (int i=0; i<E; i++) {
 			int A = sc.nextInt();
 			int B = sc.nextInt();
@@ -71,10 +83,31 @@ public class 그래프최소비용01_크루스칼 {
 		int pick = 0; // 내가 뽑은 간선의 개수
 		
 		for (int i=0; i<E; i++) {
+			int x = edges[i].A;
+			int y = edges[i].B;
+			
+			// 사이클이 발생하는지 검사를 해야한다.
+//			if (findSet(x) != findSet(y)) {
+//				// 해당 블록에 들어왔다면 .. 사이클이 아니라는 뜻
+//				union(x, y);
+//				ans += edges[i].W;
+//				pick++;
+//			}
+			
+			int px = findSet(x);
+			int py = findSet(y);
+			
+			if (px != py) {
+				union(px, py);
+				ans = edges[i].W;
+				pick++;
+			}
+			
 			if (pick == (V-1))
 				break;
 		}
 		
+		System.out.println(ans);
 		
 		
 		sc.close();
