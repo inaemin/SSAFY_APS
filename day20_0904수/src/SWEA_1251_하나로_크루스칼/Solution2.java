@@ -1,11 +1,26 @@
 package SWEA_1251_하나로_크루스칼;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class Solution {
+public class Solution2 {
+	static class Edge implements Comparable<Edge> {
+		int from, to;
+		double cost;
+		
+		public Edge(int from, int to, double cost) {
+			super();
+			this.from = from;
+			this.to = to;
+			this.cost = cost;
+		}
+		
+		public int compareTo(Edge o) {
+			return Double.compare(this.cost, o.cost);
+		}
+		
+	}
+	
 	static int T; // 테스트 케이스의 수
 	static int N; // 섬의 개수
 	static int[] X, Y; // 섬의 X좌표, Y좌표 배열
@@ -35,36 +50,25 @@ public class Solution {
 			E = sc.nextDouble();
 			
 			// 모든 섬들 사이의 환경 부담금 계산
-			List<double[]> costs = new ArrayList<double[]>();			
+			PriorityQueue<Edge> pq = new PriorityQueue<>();
 			for (int i=0; i<N; i++) {
 				for (int j=i+1; j<N; j++) {
-					double[] tmp = new double[3];
-					tmp[0] = i;
-					tmp[1] = j;
-					double L = Math.pow(X[i] - X[j], 2) + Math.pow(Y[i] - Y[j], 2);
-					tmp[2] = L * E;
-					costs.add(tmp);
+					double dx = X[i] - X[j];
+					double dy = Y[i] - Y[j];
+					double cost = (dx * dx + dy * dy) * E;
+					pq.add(new Edge(i, j, cost));
 				}
 			}
 			
-			costs.sort(new Comparator<double[]>() {
+			double totalCost = 0;
+			while (!pq.isEmpty()) {
+				Edge edge = pq.poll();
+				if (findSet(edge.from) != findSet(edge.to)) {
+					union(edge.from, edge.to);
+					totalCost += edge.cost;
+				}
+			}
 
-				@Override
-				public int compare(double[] o1, double[] o2) {
-					return Double.compare(o1[2], o2[2]);
-				}
-				
-			}); // 부담금 오름차순으로 정렬
-			
-			double totalCost = 0; 
-			for (int i=0; i<costs.size(); i++) {
-				double[] bridge = costs.get(i);
-				if (findSet((int) bridge[0]) != findSet((int) bridge[1])) {
-					union((int) bridge[0], (int) bridge[1]);
-					totalCost += bridge[2];
-				}
-			}			
-			
 			// 출력
 			System.out.println("#"+t+" "+Math.round(totalCost));
 		}
